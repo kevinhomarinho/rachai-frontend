@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Rachaí</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="icon" href="imagens/logo-no-bg.png" type="image/svg+xml">
+  <style>
+    
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #EFEFEF;
+      padding: 20px;
+      font-family: 'roboto';
+    }
+
+    .sidebar img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-options {
+      margin-bottom: 20px;
+    }
+
+    .sidebar-options a {
+      display: block;
+      padding: 5px 0;
+      text-decoration: none;
+      color: #343a40;
+    }
+
+    .sidebar-options a:hover {
+      background-color: #dee2e6;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .feed-item {
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-family: 'verdana';
+      max-height: 400px;
+    }
+    .feed-item:hover {
+    opacity: 0.6;
+}
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin-right: 30px;
+    }
+
+    .feed-item img {
+      max-width: 100%;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .btn-agendar {
+      margin-top: 10px;
+      background-color: #CF080F;
+      color: #fff; 
+      border-radius: 20px;
+    }
+
+    .barra-superior {
+      height: 50px;
+      background: linear-gradient(to right, #CF080F, #c41f1f); /* Substitua as cores pelo seu degradê desejado */
+      color: #fff;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px; /* Adiciona bordas arredondadas */
+    }
+
+        
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    
+    <img src="imagens/logo-no-bg.png" alt="Logo do aplicativo">  
+    <div class="sidebar-options">
+      <a href="#">Perfil</a>
+      <a href="carona_reservada_vazio.html">Caronas Agendadas</a>
+      <a href="#">Configurações</a>
+      <a href="loading_logout.html">Sair</a>
+    </div> 
+  </div>
+
+  <div class="content">
+    
+    <div class="barra-superior" style="display: flex;">
+      <div style="margin-left: 20px;">
+          <h3>CARONAS DISPONÍVEIS</h3>
+      </div>
+    </div>
+    
+    <div class="col-md-6 my-3">
+      <div class="input-group">
+        <input type="search" class="form-control" placeholder="Pesquisar por local de partida..." aria-label="Pesquisar" aria-describedby="button-addon2" id="searchInput">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar </button>
+        </div>
+      </div>
+  </div>
+    <div class="feed-item" data-location="Itapevi">
+      <img class="profile-img" src="imagens/renato.jpg" alt="Foto de perfil do viajante">
+      <div>
+        <h4><strong>Renato Cariani</strong></h4>
+        <p><strong>Origem:</strong> Itapevi - SP</p>
+        <p><strong>Destino:</strong> Fatec Cotia</p>
+        <h6>Segundas e quartas as 17:00</h6>
+        <a href="loading_carona.html" class="btn btn-agendar">Agendar Carona</a>
+      </div>
+    </div>
+
+    <div class="feed-item" data-location="Itapevi" >
+      <img class="profile-img" src="imagens/mulher-sorridente.jpg" alt="Foto de perfil do viajante">
+      <div>
+        <h4><strong>Leticia Oliveira</strong></h4>
+        <p><strong>Origem:</strong> Itapevi - SP</p>
+        <p><strong>Destino:</strong> Fatec Cotia</p>
+        <h6>Terças e quintas as 18:00</h6>
+        <a href="loading_carona.html" class="btn btn-agendar">Agendar Carona</a>
+      </div>
+    </div>
+
+    <div class="feed-item" data-location="Cotia">   
+        <img class="profile-img" src="imagens/homem.jpg" alt="Foto de perfil do viajante"> 
+        <div>
+          <h4><strong>Lucas Lopes</strong></h4>
+          <p><strong>Origem:</strong> Cotia Centro - SP</p>
+          <p><p><strong>Destino:</strong> Fatec Cotia</p>
+          <h6>Segunda à sexta as 18:30</h6>
+          <a href="loading_carona.html" class="btn btn-agendar">Agendar Carona</a>
+        </div>
+      </div>
+
+      <div class="feed-item" data-location="Vargem Grande Paulista"> 
+        <img class="profile-img" src="imagens/adriana.jpg" alt="Foto de perfil do viajante">
+        <div>
+          <h4><strong>Adriana Olivedo</strong></h4>
+          <p><strong>Origem:</strong> Vargem Grande Paulista- SP</p>
+          <p><strong>Destino:</strong> Fatec Cotia</p>
+          <h6>Segunda à sexta as 18:00</h6>
+          <a href="loading_carona.html" class="btn btn-agendar">Agendar Carona</a>
+        </div>
+      </div>
+  </div>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script>
+    document.getElementById('searchInput').addEventListener('input', function () {
+      var searchTerm = this.value.toLowerCase();
+      var feedItems = document.querySelectorAll('.feed-item');
+
+      feedItems.forEach(function (item) {
+        var location = item.dataset.location.toLowerCase();
+        var display = location.includes(searchTerm) ? 'flex' : 'none';
+        item.style.display = display;
+      });
+    });
+  </script>
+</script>
+</body>
+</html>

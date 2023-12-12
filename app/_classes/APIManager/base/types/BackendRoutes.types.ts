@@ -1,0 +1,1 @@
+export type BackendRoutes = "/user/signup" | "/user/signin" | `/caronas/origem=${string}/page=${string}&size=${string}` | `/caronas/page=${string}&size=${string}`;

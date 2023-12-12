@@ -1,0 +1,32 @@
+.sidebar {
+  width: 250px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #EFEFEF;
+  padding: 20px;
+  font-family: 'roboto';
+}
+
+.sidebar img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.sidebarOptions {
+  margin-bottom: 20px;
+}
+
+.sidebarOption {
+  display: block;
+  padding: 5px 0;
+  text-decoration: none;
+  color: #343a40;
+  cursor: pointer;
+}
+
+.sidebarOption:hover {
+  background-color: #dee2e6;
+}

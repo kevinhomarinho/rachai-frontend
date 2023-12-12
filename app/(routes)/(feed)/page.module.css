@@ -1,0 +1,32 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.content {
+  width: 100%;
+  padding: 20px;
+}
+
+.barraSuperior {
+  height: 50px;
+  background: linear-gradient(to right, #CF080F, #c41f1f);
+  color: #fff;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.searchRoot {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.searchInput {
+  width: 30%;
+}
