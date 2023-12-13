@@ -16,7 +16,6 @@ export class APIManager {
     });
 
     const authorization = response.headers.get("Authorization");
-    console.log(authorization+" a");
     if (authorization && authorization.startsWith("Bearer ")) {
       const accessToken = authorization.substring(7);
       CookieManager.set(accessToken, useServer);

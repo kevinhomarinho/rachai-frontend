@@ -12,7 +12,6 @@ export const setCookieServer = (accessToken: string) => {
     maxAge: twoHoursInSeconds,
     secure: !!process.env["NEXT_PUBLIC_BACKEND_URL"]?.includes("https"),
     expires: currentDate,
-    httpOnly: true,
     path: "/",
     sameSite: "lax"
   });

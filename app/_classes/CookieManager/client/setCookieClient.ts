@@ -7,7 +7,7 @@ export const setCookieClient = (accessToken: string) => {
 
   const cookieOptions = `path=/; max-age=${twoHoursInSeconds}; SameSite=Lax; ${
     isSecure ? "Secure; " : ""
-  }HttpOnly; expires=${currentDate.toUTCString()}`;
+  } expires=${currentDate.toUTCString()}`;
 
   document.cookie = `accessToken=${accessToken}; ${cookieOptions}`;
 };
