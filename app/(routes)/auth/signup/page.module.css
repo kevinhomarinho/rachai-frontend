@@ -8,7 +8,7 @@
 
 .illustration {
   width: 100vw;
-  height: 100vh;
+  height: 30vh;
   position: relative;
   background: url("/imagens/carona-compartilhada.jpg") no-repeat center center scroll;
   background-size: cover;
@@ -22,7 +22,7 @@
   left: 720px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1024px) {
   .main {
     flex-direction: row;
   }

@@ -9,6 +9,7 @@ import { Text } from "@components/Text";
 import React, { useRef, useState } from "react";
 import styles from "../../../signup/_components/RegisterForm/RegisterForm.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 export const LoginForm = () => {
   const [tryingToLogin, setTryingToLogin] = useState(false);
@@ -65,6 +66,7 @@ export const LoginForm = () => {
         <Input type="password" name="password" placeholder="Digite sua senha" />
       </div>
       <button type="submit" className={styles.register_button}>Conectar-se</button>
+      <Text size="xxs" asChild><Link href="/auth/signup">Ainda não tem uma conta?</Link></Text>
     </form>
   );
 };
