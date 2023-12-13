@@ -72,7 +72,11 @@
   }
   .sidebarOptions {
     display: block!important;
-    width: auto;
-    background-color: transparent;
+    position: static;
+  }
+  .sidebarImgRoot {
+    position: static;
+    transform: none;
+    align-self: center;
   }
 }

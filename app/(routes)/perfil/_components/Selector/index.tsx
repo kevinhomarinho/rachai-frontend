@@ -2,11 +2,15 @@
 
 import { Text } from "@components/Text";
 import styles from "./Selector.module.css";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { CheckIcon } from "@heroicons/react/24/solid";
 
-export const Selector = () => {
-  const [value, setValue] = useState<"driver" | "passenger">("passenger");
+type SelectorProps = {
+  value: "driver" | "passenger";
+  setValue: React.Dispatch<React.SetStateAction<"driver" | "passenger">>;
+};
+
+export const Selector = ({ value, setValue }: SelectorProps) => {
   const passengerRef = useRef<HTMLInputElement>(null);
   const driverRef = useRef<HTMLInputElement>(null);
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { UpdateUserBody } from "@classes/APIManager/base/types/RequestBody.types";
+import type { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBody.types";
+import type { UpdateUserBody } from "@classes/APIManager/base/types/RequestBody.types";
 import { SelectImage } from "../SelectImage";
 import { UserManager } from "@classes/APIManager/UserManager";
 import { apiErrors } from "@constants/apiErrors";
@@ -10,9 +11,19 @@ import { Input } from "@components/Input";
 import React, { useRef, useState } from "react";
 import styles from "./UpdateForm.module.css";
 
-export const UpdateForm = () => {
+type UpdateFormProps = {
+  user: ResponseUserBody;
+};
+
+export const UpdateForm = ({ user }: UpdateFormProps) => {
   const [tryingToUpdate, setTryingToUpdate] = useState(false);
-  const [userImage, setUserImage] = useState<Blob | undefined>(undefined);
+  const [userImage, setUserImage] = useState<{ file?: File; url: string; } | undefined>(
+    user.imagem_perfil ? { 
+      url: `${process.env["NEXT_PUBLIC_BACKEND_URL"]}/${user.imagem_perfil}`
+    } : undefined
+  );
+  const [value, setValue] = useState<"driver" | "passenger">(JSON.parse(user.motorista) ? "driver" : "passenger");
+
   const formRef = useRef<HTMLFormElement>(null);
   
   const deleteAccount = async () => {
@@ -34,6 +45,7 @@ export const UpdateForm = () => {
     }
     
     setTryingToUpdate(false);
+    window.alert("Usuário atualizado com sucesso!");
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,27 +59,25 @@ export const UpdateForm = () => {
     const origem = formData.get("origem")?.valueOf() as string;
     const destino = formData.get("destino")?.valueOf() as string;
     const horarios = formData.get("horarios")?.valueOf() as string;
-    const driver = !!formData.get("driver")?.valueOf();
 
-    const updateUserBody: UpdateUserBody = { motorista: driver };
-    if (username !== "") updateUserBody["username"] = username;
-    if (horarios !== "") updateUserBody["horarios"] = horarios;
-    if (origem !== "") updateUserBody["origem"] = origem;
-    if (destino !== "") updateUserBody["destino"] = destino;
-    if (userImage) updateUserBody["imagem_perfil"] = userImage;
+    const updateUserBody: UpdateUserBody = { motorista: JSON.stringify(value === "driver") };
+    if (username !== "" && user.username !== username) updateUserBody["username"] = username;
+    if (horarios !== "" && user.horarios !== horarios) updateUserBody["horarios"] = horarios;
+    if (origem !== "" && user.origem !== origem) updateUserBody["origem"] = origem;
+    if (destino !== "" && user.destino !== destino) updateUserBody["destino"] = destino;
+    if (userImage && userImage.file) updateUserBody["imagem_perfil"] = userImage.file;
 
     updateAccount(updateUserBody);
   };
 
-
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <SelectImage setUserImage={setUserImage} />
-      <Input type="text" name="username" placeholder="Digite um novo nome de usuário" />
-      <Input type="text" name="origem" placeholder="De onde você irá sair" />
-      <Input type="text" name="destino" placeholder="Para onde você vai ir" />
-      <Input type="text" name="horarios" placeholder="Horários em que você está disponível" />
-      <Selector />
+      <SelectImage image={userImage} setUserImage={setUserImage} />
+      <Input type="text" defaultValue={user.username} name="username" placeholder="Digite um novo nome de usuário" />
+      <Input type="text" defaultValue={user.origem} name="origem" placeholder="De onde você irá sair" />
+      <Input type="text" defaultValue={user.destino} name="destino" placeholder="Para onde você vai ir" />
+      <Input type="text" defaultValue={user.horarios} name="horarios" placeholder="Horários em que você está disponível" />
+      <Selector value={value} setValue={setValue} />
       <div className={styles.actions}>
         <Button onClick={deleteAccount}>Deletar conta</Button>
         <Button type="submit" color="secondary">Atualizar</Button>

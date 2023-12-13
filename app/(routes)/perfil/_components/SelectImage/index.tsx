@@ -6,20 +6,21 @@ import styles from "./SelectImage.module.css";
 import Image from "next/image";
 
 type SelectImageProps = {
-  setUserImage: React.Dispatch<React.SetStateAction<Blob | undefined>>;
+  setUserImage: React.Dispatch<React.SetStateAction<{ file?: File; url: string; } | undefined>>;
+  image?: { file?: File; url: string; };
 };
 
-export const SelectImage = ({ setUserImage }: SelectImageProps) => {
+export const SelectImage = ({ image, setUserImage }: SelectImageProps) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files![0]!;
-    setUserImage(selectedFile);
+    const file = e.target.files![0]!;
+    setUserImage({ file, url: URL.createObjectURL(file) });
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div className={styles.imageSelector} onClick={() => inputRef.current?.click()}>
       <Image
-        src="/imagens/logo-no-bg.png"
+        src={image && image.url ? image.url : "/imagens/logo-no-bg.png"}
         width={250}
         height={150}
         alt="Imagem do usuário"

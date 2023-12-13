@@ -8,6 +8,7 @@
   justify-content: center;
   position: relative;
   cursor: pointer;
+  overflow: hidden;
 }
 .imageSelector:hover > .imageOverlay {
   display: flex;
@@ -28,5 +29,5 @@
 .imageOverlayIcon {
   width: 24px;
   height: 24px;
-  color: var(--white-bg)
+  color: var(--white-bg);
 }

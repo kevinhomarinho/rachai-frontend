@@ -4,17 +4,14 @@ import { CookieManager } from "@classes/CookieManager";
 export class APIManager {
   protected static async request<U extends BackendRoutes>(
     url: U,
-    body: string | FormData,
     headers: HeadersInit = {},
     useServer: { useServer: boolean },
+    body?: string | FormData,
     method: string = "POST"
   ): Promise<Response | void> {
-    const accessToken = CookieManager.get(useServer);
-    if (!accessToken) return;
-    
     const response = await fetch(`${process.env["NEXT_PUBLIC_BACKEND_URL"]}${url}`, {
       method: method,
-      headers: { ...headers, Authorization: `Bearer ${accessToken}` },
+      headers: headers,
       body: body,
     });
 
