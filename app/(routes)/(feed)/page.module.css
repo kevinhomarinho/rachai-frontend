@@ -20,13 +20,3 @@
   justify-content: center;
   border-radius: 10px;
 }
-
-.searchRoot {
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
-}
-
-.searchInput {
-  width: 30%;
-}

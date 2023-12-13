@@ -1,3 +1,4 @@
+import { SearchInput } from "@components/SearchInput";
 import { FeedItem } from "./_components/FeedItem";
 import { Sidebar } from "@components/Sidebar";
 import { Text } from "@components/Text";
@@ -10,10 +11,7 @@ export default function FeedPage() {
       <Sidebar />
       <div className={styles.content}>
         <Text size="md" className={styles.barraSuperior} asChild><h3>CARONAS DISPONÍVEIS</h3></Text>
-        <form className={styles.searchRoot}>
-          <input type="search" className={styles.searchInput} placeholder="Pesquisar por local de partida..." aria-label="Pesquisar" aria-describedby="button-addon2" id="searchInput" />
-          <button className="btn btn-outline-secondary" type="submit">Buscar </button>
-        </form>
+        <SearchInput />
         <FeedItem />
       </div>
     </main>
