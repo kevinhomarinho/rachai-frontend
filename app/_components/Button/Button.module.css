@@ -1,0 +1,17 @@
+.button {
+  padding: 1em 2em;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+}
+.button:hover {
+  opacity: 0.6;
+}
+
+.button_primary {
+  background-color: var(--primary);
+}
+
+.button_secondary {
+  background-color: var(--secondary);
+}

@@ -9,6 +9,6 @@ type InputProps = {
 
 export const Input = ({ type, name, placeholder, ...props }: InputProps) => {
   return (
-    <input type={type} name={name} className={styles.input} placeholder={placeholder} {...props} />
+    <input type={type} name={name} className={styles.input} placeholder={placeholder} autoComplete="none" {...props} />
   );
 };

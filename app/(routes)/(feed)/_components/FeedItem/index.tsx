@@ -1,3 +1,4 @@
+import { Button } from "@/app/_components/Button";
 import { Text } from "@/app/_components/Text";
 import styles from "./FeedItem.module.css";
 import Image from "next/image";
@@ -14,11 +15,11 @@ export const FeedItem = () => {
         <Text size="sm" weight="light">Origem: Itapevi - SP</Text>
         <Text size="sm" weight="light">Destino: Fatec Cotia</Text>
         <Text size="sm" weight="light" asChild><h6>Segundas e quartas as 17:00</h6></Text>
-        <Text size="sm">
-          <a href="loading_carona.html" className={`${styles.btn} ${styles.btnAgendar}`}>
+        <Button style={{padding: "0.6em"}}>
+          <Text size="sm">
             Agendar Carona
-          </a>
-        </Text>
+          </Text>
+        </Button>
       </div>
     </div>
   );

@@ -1,0 +1,30 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.actions {
+  width: 100%;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .form {
+    width: 600px;
+    height: auto;
+  }
+  .actions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

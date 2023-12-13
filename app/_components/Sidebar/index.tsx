@@ -6,6 +6,7 @@ import React, { useRef } from "react";
 import styles from "./Sidebar.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { APIManager } from "@/app/_classes/APIManager/base";
 
 export const Sidebar = () => {
   const optionsRef = useRef<HTMLDivElement>(null);
@@ -23,7 +24,7 @@ export const Sidebar = () => {
       <div className={styles.sidebarOptions} ref={optionsRef}>
         <Text className={styles.sidebarOption} fixeSize asChild><Link href="/perfil">Perfil</Link></Text>
         <Text className={styles.sidebarOption} fixeSize asChild><Link href="/carona-reservada">Caronas Agendadas</Link></Text>
-        <Text className={styles.sidebarOption} fixeSize>Sair</Text>
+        <Text className={styles.sidebarOption} fixeSize onClick={() => APIManager.signOut()}>Sair</Text>
       </div> 
     </div>
   );

@@ -1,3 +1,4 @@
+import { Button } from "@components/Button";
 import { Text } from "@components/Text";
 import styles from "./page.module.css";
 import Image from "next/image";
@@ -10,7 +11,7 @@ export default function CaronaConfirmadaPage() {
       <div className={styles.caronaConfirmada}>
         <Image src="/imagens/confirma.png" alt="Sucesso" className={styles.confirmationImage} width={100} height={100} />
         <Text asChild><h3>Carona solicitada com sucesso</h3></Text>
-        <Link href="/carona-reservada" className={styles.btnPrimary}>Ver minhas caronas agendadas</Link>
+        <Button asChild><Link href="/carona-reservada">Ver minhas caronas agendadas</Link></Button>
       </div>
     </main>
   );

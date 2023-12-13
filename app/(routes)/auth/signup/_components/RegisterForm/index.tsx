@@ -4,6 +4,7 @@ import { UserManager } from "@classes/APIManager/UserManager";
 import { SignUpBody } from "@classes/APIManager/base/types/RequestBody.types";
 import { apiErrors } from "@constants/apiErrors";
 import { useRouter } from "next/navigation";
+import { Button } from "@components/Button";
 import { Input } from "@components/Input";
 import { Text } from "@components/Text";
 import React, { useRef, useState } from "react";
@@ -69,7 +70,7 @@ export const RegisterForm = () => {
         <Input type="email" name="email" placeholder="Digite seu e-mail" />
         <Input type="password" name="password" placeholder="Digite sua senha" />
       </div>
-      <button type="submit" className={styles.register_button}>Registrar-se</button>
+      <Button type="submit">Registrar-se</Button>
       <Text size="xxs" asChild><Link href="/auth/signin">Já tem uma conta?</Link></Text>
     </form>
   );

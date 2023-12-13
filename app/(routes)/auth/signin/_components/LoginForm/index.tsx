@@ -4,6 +4,7 @@ import { UserManager } from "@classes/APIManager/UserManager";
 import { SignInBody } from "@classes/APIManager/base/types/RequestBody.types";
 import { apiErrors } from "@constants/apiErrors";
 import { useRouter } from "next/navigation";
+import { Button } from "@components/Button";
 import { Input } from "@components/Input";
 import { Text } from "@components/Text";
 import React, { useRef, useState } from "react";
@@ -65,7 +66,7 @@ export const LoginForm = () => {
         <Input type="email" name="email" placeholder="Digite seu e-mail" />
         <Input type="password" name="password" placeholder="Digite sua senha" />
       </div>
-      <button type="submit" className={styles.register_button}>Conectar-se</button>
+      <Button type="submit">Conectar-se</Button>
       <Text size="xxs" asChild><Link href="/auth/signup">Ainda não tem uma conta?</Link></Text>
     </form>
   );

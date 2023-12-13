@@ -17,14 +17,3 @@
 .confirmationImage {
   margin-bottom: 20px;
 }
-
-.btnPrimary {
-  background-color: #CF080F; 
-  color: #ffffff; 
-  border-color: #ffffff; 
-  cursor: pointer;
-}
-
-.btnPrimary:hover {
-  opacity: 0.7;
-}

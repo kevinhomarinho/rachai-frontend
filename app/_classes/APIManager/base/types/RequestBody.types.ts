@@ -14,3 +14,12 @@ export type SignInBody = {
   password: string;
   email: string;
 };
+
+export type UpdateUserBody = {
+  username?: string;
+  origem?: string;
+  destino?: string;
+  horarios?: string;
+  imagem_perfil?: Blob | undefined;
+  motorista?: boolean;
+}

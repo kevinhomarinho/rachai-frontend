@@ -9,9 +9,12 @@ export class APIManager {
     useServer: { useServer: boolean },
     method: string = "POST"
   ): Promise<Response | void> {
+    const accessToken = CookieManager.get(useServer);
+    if (!accessToken) return;
+    
     const response = await fetch(`${process.env["NEXT_PUBLIC_BACKEND_URL"]}${url}`, {
       method: method,
-      headers: headers,
+      headers: { ...headers, Authorization: `Bearer ${accessToken}` },
       body: body,
     });
 
