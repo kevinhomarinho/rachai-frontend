@@ -10,8 +10,8 @@ export class UserManager extends APIManager {
       { useServer: false }
     );
     console.log(response);
-    if (response.status !== 200) {
-      const { error, message } = await response.json() as { error?: string; message?: string; };
+    if (response!.status !== 200) {
+      const { error, message } = await response!.json() as { error?: string; message?: string; };
       console.log(error);
       console.log(message);
       if (apiErrors.includes(error!)) return { error, message };
@@ -24,8 +24,8 @@ export class UserManager extends APIManager {
       { "Content-Type": "application/json" }, { useServer: false }
     );
 
-    if (response.status !== 200) {
-      const { error, message } = await response.json() as { error?: string; message?: string; };
+    if (response!.status !== 200) {
+      const { error, message } = await response!.json() as { error?: string; message?: string; };
       if (apiErrors.includes(error!)) return { error, message };
     }
   }

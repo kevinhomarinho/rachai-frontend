@@ -8,12 +8,14 @@ export class APIManager {
     headers: HeadersInit = {},
     useServer: { useServer: boolean },
     method: string = "POST"
-  ): Promise<Response> {
+  ): Promise<Response | void> {
     const response = await fetch(`${process.env["NEXT_PUBLIC_BACKEND_URL"]}${url}`, {
       method: method,
       headers: headers,
       body: body,
     });
+
+    if (response.status === 401) return this.signOut(useServer);
 
     const authorization = response.headers.get("Authorization");
     if (authorization && authorization.startsWith("Bearer ")) {
@@ -22,11 +24,6 @@ export class APIManager {
     }
 
     return response;
-  }
-
-  protected static async handleResponse<T>(response: Response, useServer: { useServer: boolean }): Promise<void | T | { error: string; message: string; }> {
-    if (response.status === 401) return this.signOut(useServer);
-    return await response.json();
   }
 
   public static async signOut({ useServer }: { useServer: boolean } = { useServer: false }): Promise<void> {
