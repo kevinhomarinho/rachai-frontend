@@ -7,6 +7,7 @@
 
 .content {
   width: 100%;
+  margin-top: 70px;
   padding: 20px;
 }
 
@@ -19,4 +20,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    margin-top: 0;
+  }
 }
