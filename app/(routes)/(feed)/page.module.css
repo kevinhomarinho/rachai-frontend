@@ -7,22 +7,27 @@
 
 .content {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-top: 70px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .barraSuperior {
   height: 50px;
   background: linear-gradient(to right, #CF080F, #c41f1f);
   color: #fff;
-  margin-bottom: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+}
+
+.searchTop {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
