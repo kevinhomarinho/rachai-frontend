@@ -20,6 +20,6 @@ export type UpdateUserBody = {
   origem?: string;
   destino?: string;
   horarios?: string;
-  imagem_perfil?: Blob | undefined;
+  imagem_perfil?: Blob;
   motorista?: boolean;
 }

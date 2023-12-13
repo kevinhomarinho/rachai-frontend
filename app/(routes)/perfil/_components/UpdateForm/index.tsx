@@ -32,7 +32,8 @@ export const UpdateForm = () => {
       window.alert("Erro ao atualizar informações do usuário.");
       return;
     }
-
+    
+    setTryingToUpdate(false);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,23 +49,14 @@ export const UpdateForm = () => {
     const horarios = formData.get("horarios")?.valueOf() as string;
     const driver = !!formData.get("driver")?.valueOf();
 
-    // validações
-    // if (password !== confirmPassword) {
-    //   setTryingToUpdate(false);
-    //   window.alert("É necessário que .");
-    //   return;
-    // } else if (!acceptedTerms) {
-    //   setTryingToUpdate(false);
-    //   window.alert("Você precisa aceitar os termos se quiser fazer parte do Gamix!");
-    //   return;
-    // }
+    const updateUserBody: UpdateUserBody = { motorista: driver };
+    if (username !== "") updateUserBody["username"] = username;
+    if (horarios !== "") updateUserBody["horarios"] = horarios;
+    if (origem !== "") updateUserBody["origem"] = origem;
+    if (destino !== "") updateUserBody["destino"] = destino;
+    if (userImage) updateUserBody["imagem_perfil"] = userImage;
 
-    updateAccount({
-      username, horarios,
-      origem, destino,
-      imagem_perfil: userImage,
-      motorista: driver 
-    });
+    updateAccount(updateUserBody);
   };
 
 
