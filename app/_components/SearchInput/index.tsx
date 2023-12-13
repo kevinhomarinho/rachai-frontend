@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@components/Button";
 import styles from "./SearchInput.module.css";
 import React from "react";
 
@@ -9,10 +10,10 @@ export const SearchInput = () => {
     <form className={styles.searchRoot}>
       <input
         type="search" className={styles.searchInput}
-        placeholder="Pesquisar por local de partida..." aria-label="Pesquisar"
-        aria-describedby="button-addon2" id="searchInput"
+        placeholder="Pesquisar por local de partida..."
+        aria-label="Pesquisar"
       />
-      <button className="btn btn-outline-secondary" type="submit">Buscar </button>
+      <Button className={styles.button} type="submit">Buscar</Button>
     </form>
   );
 };

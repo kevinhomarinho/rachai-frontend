@@ -14,6 +14,19 @@ export const Selector = ({ value, setValue }: SelectorProps) => {
   const passengerRef = useRef<HTMLInputElement>(null);
   const driverRef = useRef<HTMLInputElement>(null);
 
+  const options = [
+    {
+      value: "passenger",
+      text: "Passageiro",
+      ref: driverRef
+    },
+    {
+      value: "driver",
+      text: "Motorista",
+      ref: passengerRef
+    }
+  ];
+
   const handleClick = () => {
     if (value === "driver") {
       passengerRef.current!.checked = false;
@@ -26,26 +39,20 @@ export const Selector = ({ value, setValue }: SelectorProps) => {
 
   return (
     <div className={styles.selector}>
-      <div className={styles.option}>
-        <div className={styles.input} onClick={() => passengerRef.current?.click()}>
-          { value === "passenger" && (<CheckIcon className={styles.icon} />) }
-        </div>
-        <input
-          type="checkbox" onClick={handleClick} style={{display: "none"}}
-          defaultChecked={true} ref={passengerRef} name="passenger"
-        />
-        <Text size="sm">Passageiro</Text>
-      </div>
-      <div className={styles.option}>
-        <div className={styles.input} onClick={() => driverRef.current?.click()}>
-          { value === "driver" && (<CheckIcon className={styles.icon} />) }
-        </div>
-        <input
-          type="checkbox" onClick={handleClick} style={{display: "none"}}
-          defaultChecked={false} ref={driverRef} name="driver"
-        />
-        <Text size="sm">Motorista</Text>
-      </div>
+      {
+        options.map(option => (
+          <div className={styles.option} key={option.value}>
+            <div className={styles.input} onClick={() => option.ref.current?.click()}>
+              { value === option.value && (<CheckIcon className={styles.icon} />) }
+            </div>
+            <input
+              type="checkbox" onClick={handleClick} style={{display: "none"}}
+              defaultChecked={true} ref={option.ref} name={option.value}
+            />
+            <Text size="sm">{option.text}</Text>
+          </div>
+        ))
+      }
     </div>
   );
 };

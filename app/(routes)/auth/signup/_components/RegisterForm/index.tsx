@@ -62,7 +62,7 @@ export const RegisterForm = () => {
 
   return (
     <form className={styles.register_area} onSubmit={handleSubmit} ref={formRef}>
-      <Image src="/imagens/logo-no-bg.png" alt="logo" width={250} height={146} />
+      <Image src="/imagens/logo-no-bg.png" alt="logo" width={250} height={146} priority />
       <Text asChild><h2 className={styles.register_title}>Registro</h2></Text>
       <div className={styles.register_fields}>
         <Input type="text" name="username" placeholder="Digite seu nome de usuário" />

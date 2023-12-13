@@ -24,6 +24,7 @@ export const SelectImage = ({ image, setUserImage }: SelectImageProps) => {
         width={250}
         height={150}
         alt="Imagem do usuário"
+        priority
       />
       <div className={styles.imageOverlay}>
         <PencilIcon className={styles.imageOverlayIcon} />

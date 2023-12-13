@@ -6,6 +6,7 @@ import styles from "./Button.module.css";
 
 type ButtonProps = {
   children: React.ReactNode;
+  disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   asChild?: boolean;
   color?: "primary" | "secondary";
@@ -13,13 +14,18 @@ type ButtonProps = {
   style?: HtmlHTMLAttributes<HTMLButtonElement>["style"];
 } & HtmlHTMLAttributes<HTMLButtonElement>;
 
-export const Button = ({ children, onClick, type, color="primary", asChild=false, style, className, ...props }: ButtonProps) => {
+export const Button = ({
+  children, onClick, type,
+  color="primary", asChild=false,
+  style, className, disabled=false,
+  ...props 
+}: ButtonProps) => {
   const Component = asChild ? Slot : "button";
 
   return (
     <Component
       onClick={onClick}
-      className={`${styles.button} ${styles[`button_${color}`]} ${className}`}
+      className={`${styles.button} ${styles[`button_${color}`]} ${className} ${disabled ? styles.disabled : ""}`}
       style={style}
       type={type}
       {...props}

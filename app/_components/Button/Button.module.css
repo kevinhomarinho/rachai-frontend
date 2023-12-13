@@ -15,3 +15,12 @@
 .button_secondary {
   background-color: var(--secondary);
 }
+
+.disabled {
+  background-color: var(--alternative);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.disabled:hover {
+  opacity: 0.7;
+}

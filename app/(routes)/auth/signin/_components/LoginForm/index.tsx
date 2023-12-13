@@ -60,7 +60,7 @@ export const LoginForm = () => {
   };
   return (
     <form className={styles.register_area} onSubmit={handleSubmit} ref={formRef}>
-      <Image src="/imagens/logo-no-bg.png" alt="logo" width={250} height={146} />
+      <Image src="/imagens/logo-no-bg.png" alt="logo" width={250} height={146} priority />
       <Text asChild><h2 className={styles.register_title}>Login</h2></Text>
       <div className={styles.register_fields}>
         <Input type="email" name="email" placeholder="Digite seu e-mail" />

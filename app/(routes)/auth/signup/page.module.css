@@ -2,16 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   max-width: 100vw;
   min-height: 100vh;
 }
 
 .illustration {
-  width: 100vw;
-  height: 30vh;
+  width: 50%;
+  height: 100vh;
   position: relative;
   background: url("/imagens/carona-compartilhada.jpg") no-repeat center center scroll;
   background-size: cover;
+  display: none;
 }
 
 .illustration > img {
@@ -27,7 +29,6 @@
     flex-direction: row;
   }
   .illustration {
-    width: 50%;
-    height: 100vh;
+    display: block;
   }
 }

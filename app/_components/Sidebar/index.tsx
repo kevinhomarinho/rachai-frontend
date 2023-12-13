@@ -26,7 +26,7 @@ export const Sidebar = () => {
       }
 
       <div className={styles.sidebarImgRoot}>
-        <Image src="/imagens/logo-no-bg.png" className={styles.sidebarImg} alt="Logo do aplicativo" width={210} height={120} />  
+        <Image src="/imagens/logo-no-bg.png" className={styles.sidebarImg} alt="Logo do aplicativo" width={210} height={120} priority />  
       </div>
       <div className={styles.sidebarOptions} ref={optionsRef} style={{display: "none"}}>
         <Text className={styles.sidebarOption} fixeSize asChild><Link href="/">Início</Link></Text>

@@ -1,9 +1,9 @@
+import { UserManager } from "@/app/_classes/APIManager/UserManager";
 import { UpdateForm } from "./_components/UpdateForm";
 import { Sidebar } from "@components/Sidebar";
 import localStyles from "./page.module.css";
 import styles from "../(feed)/page.module.css";
 import React from "react";
-import { UserManager } from "@/app/_classes/APIManager/UserManager";
 
 const findData = async () => {
   return UserManager.findUserByToken({ useServer: true });
