@@ -25,12 +25,7 @@ export class APIManager {
   }
 
   protected static async handleResponse<T>(response: Response, useServer: { useServer: boolean }): Promise<void | T | { error: string; message: string; }> {
-    if (response.status === 401) {
-      this.signOut(useServer);
-      if (window) window.location.href = "/auth/signin";
-      return;
-    }
-
+    if (response.status === 401) return this.signOut(useServer);
     return await response.json();
   }
 
