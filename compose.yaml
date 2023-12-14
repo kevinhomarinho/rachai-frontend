@@ -5,8 +5,7 @@ services:
     ports:
       - 8080:8080
   frontend:
-    build: .
-    # image: vinirosa08/rachaifrontend:latest
+    image: vinirosa08/rachaifrontend:latest
     ports:
       - 3000:3000
     links:
