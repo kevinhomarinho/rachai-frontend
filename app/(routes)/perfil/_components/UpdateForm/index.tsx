@@ -39,7 +39,8 @@ export const UpdateForm = () => {
 
   if (!user) return null;
 
-  const deleteAccount = async () => {
+  const deleteAccount = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
     if (tryingToDelete) return;
     setTryingToDelete(true);
     await UserManager.delete();
@@ -97,7 +98,7 @@ export const UpdateForm = () => {
       <Input type="text" defaultValue={user.horarios} name="horarios" placeholder="Horários em que você está disponível" />
       <Selector value={value} setValue={setValue} />
       <div className={styles.actions}>
-        <Button onClick={deleteAccount}>Deletar conta</Button>
+        <Button type="button" onClick={deleteAccount}>Deletar conta</Button>
         <Button type="submit" color="secondary">Atualizar</Button>
       </div>
     </form>

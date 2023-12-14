@@ -38,7 +38,7 @@ export const Sidebar = () => {
       <div className={styles.sidebarOptions} ref={optionsRef} style={{display: "none"}}>
         <Text className={styles.sidebarOption} fixeSize asChild><Link href="/">Início</Link></Text>
         <Text className={styles.sidebarOption} fixeSize asChild><Link href="/perfil">Perfil</Link></Text>
-        <Text className={styles.sidebarOption} fixeSize onClick={() => handleSignout}>Sair</Text>
+        <Text className={styles.sidebarOption} fixeSize onClick={handleSignout}>Sair</Text>
       </div> 
     </div>
   );

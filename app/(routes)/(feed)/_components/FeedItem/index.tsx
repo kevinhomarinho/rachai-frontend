@@ -11,7 +11,6 @@ type FeedItemProps = {
 };
 
 export const FeedItem = ({ actualUser, user }: FeedItemProps) => {
-  console.log(actualUser);
   const url = user.imagem_perfil
     ? `${process.env["NEXT_PUBLIC_BACKEND_URL"]}/${user.imagem_perfil}`
     : "/imagens/logo-no-bg.png";

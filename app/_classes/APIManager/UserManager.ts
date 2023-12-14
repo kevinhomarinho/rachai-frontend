@@ -40,7 +40,6 @@ export class UserManager extends APIManager {
   public static async findUserByToken(useServer: { useServer: boolean; url?: string; } = { useServer: false }): Promise<ResponseUserBody | undefined> {
     const headers = { Authorization: `Bearer ${await CookieManager.get(useServer)}` };
     const response = await this.request("/user/read", headers, useServer, undefined, "GET");
-    console.log(useServer);
     return await this.handleResponse(response, useServer);
   }
 }
