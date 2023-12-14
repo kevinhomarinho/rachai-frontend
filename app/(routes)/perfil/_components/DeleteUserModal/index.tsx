@@ -13,7 +13,7 @@ type DeleteUserModalProps = {
 export const DeleteUserModal = ({ children, handleDeleteAccount }: DeleteUserModalProps) => {
   return (
     <Dialog.Root modal>
-      <Dialog.Trigger>
+      <Dialog.Trigger asChild>
         {children}
       </Dialog.Trigger>
       <Dialog.Portal>

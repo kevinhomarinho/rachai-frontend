@@ -9,6 +9,7 @@
   padding: 20px;
   background-color: var(--white-bg);
   font-family: 'roboto';
+  z-index: 1;
 }
 
 .icon {
