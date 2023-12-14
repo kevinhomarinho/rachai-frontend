@@ -51,7 +51,6 @@ export const UpdateForm = () => {
     router.push("/auth/signin");
   };
 
-
   const updateAccount = async (updateUserBody: UpdateUserBody) => {
     const response = await UserManager.update(updateUserBody);
 
@@ -115,7 +114,10 @@ export const UpdateForm = () => {
       }
     }
     if (updateUserBody["imagem_perfil"]) {
-      if (!["image/jpeg", "image/png", "image/webp"].includes(updateUserBody["imagem_perfil"].type)) {
+      if (updateUserBody["imagem_perfil"].size > 1000000) {
+        window.alert("O tamanho máximo permitido é de 1MB.");
+        return;
+      } else if (!["image/jpeg", "image/png", "image/webp"].includes(updateUserBody["imagem_perfil"].type)) {
         setTryingToUpdate(false);
         window.alert("Apenas aceitamos os formatos de imagem: \".jpeg, .jpg, .png e .webp\".");
         return;

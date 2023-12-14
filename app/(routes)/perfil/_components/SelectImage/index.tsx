@@ -13,7 +13,10 @@ type SelectImageProps = {
 export const SelectImage = ({ image, setUserImage }: SelectImageProps) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0]!;
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    if (file.size > 1000000) {
+      window.alert("O tamanho máximo permitido é de 1MB.");
+      return;
+    } else if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
       window.alert("Apenas aceitamos os formatos de imagem: \".jpeg, .jpg, .png e .webp\".");
       return;
     }
