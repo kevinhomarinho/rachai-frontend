@@ -25,7 +25,7 @@ export const DeleteUserModal = ({ children, handleDeleteAccount }: DeleteUserMod
               </Text>
             </Dialog.Title>
             <Dialog.Description asChild>
-              <Text size="default" weight="light">
+              <Text size="default" weight="light" align="center">
                 Você tem certeza de que deseja deletar a sua conta?
               </Text>
             </Dialog.Description>
