@@ -29,7 +29,10 @@ export const DeleteUserModal = ({ children, handleDeleteAccount }: DeleteUserMod
                 Você tem certeza de que deseja deletar a sua conta?
               </Text>
             </Dialog.Description>
-            <div style={{ display: "flex", marginTop: 25, justifyContent: "flex-end" }}>
+            <div style={{ display: "flex", marginTop: 25, justifyContent: "flex-end", gap: "8px" }}>
+              <Dialog.Close asChild>
+                <Button type="button" color="secondary">Cancelar</Button>
+              </Dialog.Close>
               <Dialog.Close asChild>
                 <Button onClick={handleDeleteAccount} type="button" color="primary">Deletar</Button>
               </Dialog.Close>
