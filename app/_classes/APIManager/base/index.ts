@@ -1,6 +1,5 @@
 import type { BackendRoutes } from "./types/BackendRoutes.types";
 import { CookieManager } from "@classes/CookieManager";
-import { apiErrors } from "@constants/apiErrors";
 
 export class APIManager {
   protected static async request<U extends BackendRoutes>(
@@ -32,7 +31,7 @@ export class APIManager {
 
     if (response.status !== 200) {
       const { error, message } = await response!.json() as { error?: string; message?: string; };
-      if (apiErrors.includes(error!)) return { error, message };
+      if (error && message) return { error, message };
     }
     
     try {

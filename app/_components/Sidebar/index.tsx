@@ -1,13 +1,13 @@
 "use client";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { CookieManager } from "@classes/CookieManager";
+import { useRouter } from "next/navigation";
 import { Text } from "@components/Text";
 import React, { useRef, useState } from "react";
 import styles from "./Sidebar.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { CookieManager } from "@/app/_classes/CookieManager";
-import { useRouter } from "next/navigation";
 
 export const Sidebar = () => {
   const [open, setOpen] = useState(false);
