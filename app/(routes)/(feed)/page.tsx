@@ -1,4 +1,3 @@
-import { SearchInput } from "@components/SearchInput";
 import { FeedItems } from "./_components/FeedItems";
 import { Sidebar } from "@components/Sidebar";
 import { Text } from "@components/Text";
@@ -11,7 +10,6 @@ export default async function FeedPage() {
       <Sidebar />
       <div className={styles.content}>
         <Text size="md" className={styles.barraSuperior} asChild><h3>CARONAS DISPONÍVEIS</h3></Text>
-        <SearchInput />
         <FeedItems />
       </div>
     </main>

@@ -44,9 +44,9 @@ export const UpdateForm = () => {
     if (tryingToDelete) return;
     setTryingToDelete(true);
     await UserManager.delete();
-    CookieManager.delete({ useServer: false });
+    await CookieManager.delete({ useServer: false });
     setTryingToDelete(false);
-    router.push("/");
+    router.push("/auth/signin");
   };
 
 

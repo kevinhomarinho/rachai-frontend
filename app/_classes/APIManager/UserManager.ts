@@ -20,14 +20,12 @@ export class UserManager extends APIManager {
 
   public static async update(updateUserBody: UpdateUserBody): Promise<void | { error?: string; message?: string; }> {
     const formData = new FormData();
-
     for (const key of Object.keys(updateUserBody)) {
       formData.append(key, updateUserBody[key as keyof typeof updateUserBody]!);
     }
 
     const headers = { Authorization: `Bearer ${await CookieManager.get({ useServer: false })}` };
     const response = await this.request("/user/update", headers, { useServer: false }, formData, "PATCH");
-
     return await this.handleResponse(response);
   }
 
