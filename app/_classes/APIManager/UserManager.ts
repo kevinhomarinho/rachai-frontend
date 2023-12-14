@@ -1,63 +1,45 @@
 import type { SignInBody, SignUpBody, UpdateUserBody } from "@classes/APIManager/base/types/RequestBody.types";
-import { APIManager } from "@classes/APIManager/base";
-import { apiErrors } from "@constants/apiErrors";
-import { CookieManager } from "../CookieManager";
 import { ResponseUserBody } from "./base/types/ResponseBody.types";
+import { CookieManager } from "../CookieManager";
+import { APIManager } from "@classes/APIManager/base";
 
 export class UserManager extends APIManager {
   public static async signUp(signUpBody: SignUpBody): Promise<void | { error?: string; message?: string; }> {
-    const response = await APIManager.request(
+    const response = await this.request(
       "/user/signup", { "Content-Type": "application/json" }, { useServer: false }, JSON.stringify(signUpBody)
     );
-    
-    if (response && response.status >= 400) {
-      const { error, message } = await response!.json() as { error?: string; message?: string; };
-      if (apiErrors.includes(error!)) return { error, message };
-    }
+    return await this.handleResponse(response);
   }
 
   public static async signIn(signInBody: SignInBody): Promise<void | { error?: string; message?: string; }> {
-    const response = await APIManager.request(
+    const response = await this.request(
       "/user/signin", { "Content-Type": "application/json" }, { useServer: false }, JSON.stringify(signInBody)
     );
-
-    if (response && response.status >= 400) {
-      const { error, message } = await response!.json() as { error?: string; message?: string; };
-      if (apiErrors.includes(error!)) return { error, message };
-    }
+    return await this.handleResponse(response);
   }
 
-  public static async update(
-    updateUserBody: UpdateUserBody,
-    useServer: { useServer: boolean } = { useServer: false }
-  ): Promise<void | { error?: string; message?: string; }> {
+  public static async update(updateUserBody: UpdateUserBody): Promise<void | { error?: string; message?: string; }> {
     const formData = new FormData();
 
     for (const key of Object.keys(updateUserBody)) {
       formData.append(key, updateUserBody[key as keyof typeof updateUserBody]!);
     }
 
-    const headers = { Authorization: `Bearer ${CookieManager.get(useServer)}` };
-    const response = await APIManager.request("/user/update", headers, useServer, formData, "PATCH");
+    const headers = { Authorization: `Bearer ${await CookieManager.get({ useServer: false })}` };
+    const response = await this.request("/user/update", headers, { useServer: false }, formData, "PATCH");
 
-    if (response && response.status >= 400) {
-      const { error, message } = await response!.json() as { error?: string; message?: string; };
-      if (apiErrors.includes(error!)) return { error, message };
-    }
+    return await this.handleResponse(response);
   }
 
-  public static async findUserByToken(useServer: { useServer: boolean } = { useServer: false }): Promise<ResponseUserBody | undefined> {
-    const headers = { Authorization: `Bearer ${CookieManager.get(useServer)}` };
-    const response = await APIManager.request("/user/read", headers, useServer, undefined, "GET");
-    if (response && response.status === 200) return await response!.json();
+  public static async delete(): Promise<void | { error?: string; message?: string; }> {
+    const headers = { Authorization: `Bearer ${await CookieManager.get({ useServer: false })}` };
+    const response = await this.request("/user/delete", headers, { useServer: false }, undefined, "DELETE");
+    return await this.handleResponse(response);
   }
 
-  public static async delete(useServer: { useServer: boolean } = { useServer: false }): Promise<void | { error?: string; message?: string; }> {
-    const headers = { Authorization: `Bearer ${CookieManager.get(useServer)}` };
-    const response = await APIManager.request("/user/delete", headers, useServer, undefined, "DELETE");
-    if (response && response.status >= 400) {
-      const { error, message } = await response!.json() as { error?: string; message?: string; };
-      if (apiErrors.includes(error!)) return { error, message };
-    }
+  public static async findUserByToken(useServer: { useServer: boolean; } = { useServer: false }): Promise<ResponseUserBody | undefined> {
+    const headers = { Authorization: `Bearer ${await CookieManager.get(useServer)}` };
+    const response = await this.request("/user/read", headers, useServer, undefined, "GET");
+    return await this.handleResponse(response, useServer);
   }
 }

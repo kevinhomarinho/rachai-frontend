@@ -1,5 +1,6 @@
 import type { BackendRoutes } from "./types/BackendRoutes.types";
 import { CookieManager } from "@classes/CookieManager";
+import { apiErrors } from "@constants/apiErrors";
 
 export class APIManager {
   protected static async request<U extends BackendRoutes>(
@@ -8,14 +9,12 @@ export class APIManager {
     useServer: { useServer: boolean },
     body?: string | FormData,
     method: string = "POST"
-  ): Promise<Response | void> {
+  ): Promise<Response> {
     const response = await fetch(`${process.env["NEXT_PUBLIC_BACKEND_URL"]}${url}`, {
       method: method,
       headers: headers,
       body: body,
     });
-
-    if (response.status === 401 || response.status === 403) return this.signOut(useServer);
 
     const accessToken = response.headers.get("Authorization");
     if (accessToken && accessToken.startsWith("Bearer ")) {
@@ -25,7 +24,17 @@ export class APIManager {
     return response;
   }
 
-  public static async signOut({ useServer }: { useServer: boolean } = { useServer: false }): Promise<void> {
-    return await CookieManager.delete({ useServer });
+  protected static async handleResponse(response: Response, useServer: { useServer: boolean } = { useServer: false }) {
+    if (response.status === 401 || response.status === 403) {
+      await CookieManager.delete(useServer);
+      return { error: "UNAUTHORIZED", message: "Sem autorização, volte para o login." };
+    }
+
+    if (response.status !== 200) {
+      const { error, message } = await response!.json() as { error?: string; message?: string; };
+      if (apiErrors.includes(error!)) return { error, message };
+    }
+
+    return await response.json();
   }
 }

@@ -1,5 +1,10 @@
+"use server";
+
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+
 export async function deleteCookieServer() {
-  await fetch("http://localhost:3000/api/cookie/delete", {
-    method: "GET"
-  });
+  const cookiesStore = cookies();
+  if (cookiesStore.get("accessToken")) cookies().delete("accessToken");
+  redirect("/auth/signin");
 }

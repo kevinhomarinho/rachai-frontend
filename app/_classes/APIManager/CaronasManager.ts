@@ -1,38 +1,21 @@
 import { ResponseUserBody } from "./base/types/ResponseBody.types";
 import { CookieManager } from "../CookieManager";
 import { APIManager } from "@classes/APIManager/base";
-import { apiErrors } from "@constants/apiErrors";
 
 export class CaronasManager extends APIManager {
-  public static async findAll(
-    page: number, useServer: { useServer: boolean; } = { useServer: false }
-  ): Promise<ResponseUserBody[] | { error?: string; message?: string; }> {
-    const headers = { Authorization: `Bearer ${CookieManager.get(useServer)}` };
-    const response = await APIManager.request(
+  public static async findAll(page: number): Promise<ResponseUserBody[] | { error?: string; message?: string; }> {
+    const headers = { Authorization: `Bearer ${await CookieManager.get({ useServer: false })}` };
+    const response = await this.request(
       `/caronas/page=${page.toString()}&size=10`, headers, { useServer: false }, undefined, "GET"
     );
-
-    if (response && response.status !== 200) {
-      const { error, message } = await response!.json() as { error?: string; message?: string; };
-      if (apiErrors.includes(error!)) return { error, message };
-    }
-
-    return await response!.json();
+    return await this.handleResponse(response);
   }
 
-  public static async findAllByOrigin(
-    page: number, filter: string, useServer: { useServer: boolean; } = { useServer: false }
-  ): Promise<ResponseUserBody[] | { error?: string; message?: string; }> {
-    const headers = { Authorization: `Bearer ${CookieManager.get(useServer)}` };
-    const response = await APIManager.request(
+  public static async findAllByOrigin(page: number, filter: string): Promise<ResponseUserBody[] | { error?: string; message?: string; }> {
+    const headers = { Authorization: `Bearer ${await CookieManager.get({ useServer: false })}` };
+    const response = await this.request(
       `/caronas/origem=${filter}/page=${page.toString()}&size=10`, headers, { useServer: false }, undefined, "GET"
     );
-
-    if (response && response.status !== 200) {
-      const { error, message } = await response!.json() as { error?: string; message?: string; };
-      if (apiErrors.includes(error!)) return { error, message };
-    }
-    
-    return await response!.json();
+    return await this.handleResponse(response);
   }
 }
