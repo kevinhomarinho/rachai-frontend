@@ -24,7 +24,7 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-RUN echo "NEXT_PUBLIC_BACKEND_URL=http://backend:8080" > /app/.env
+RUN echo "NEXT_PUBLIC_BACKEND_URL=http://localhost:8080" > .env
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
