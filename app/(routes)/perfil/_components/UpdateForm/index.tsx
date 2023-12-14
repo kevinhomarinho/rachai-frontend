@@ -114,6 +114,13 @@ export const UpdateForm = () => {
         return;
       }
     }
+    if (updateUserBody["imagem_perfil"]) {
+      if (!["image/jpeg", "image/png", "image/webp"].includes(updateUserBody["imagem_perfil"].type)) {
+        setTryingToUpdate(false);
+        window.alert("Apenas aceitamos os formatos de imagem: \".jpeg, .jpg, .png e .webp\".");
+        return;
+      }
+    }
 
     updateAccount(updateUserBody);
   };

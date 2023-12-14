@@ -13,6 +13,10 @@ type SelectImageProps = {
 export const SelectImage = ({ image, setUserImage }: SelectImageProps) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0]!;
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      window.alert("Apenas aceitamos os formatos de imagem: \".jpeg, .jpg, .png e .webp\".");
+      return;
+    }
     setUserImage({ file, url: URL.createObjectURL(file) });
   };
 
@@ -24,6 +28,7 @@ export const SelectImage = ({ image, setUserImage }: SelectImageProps) => {
         width={250}
         height={150}
         alt="Imagem do usuário"
+        className={styles.image}
         priority
       />
       <div className={styles.imageOverlay}>
