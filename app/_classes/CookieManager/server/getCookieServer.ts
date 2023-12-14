@@ -3,5 +3,5 @@
 import { cookies } from "next/headers";
 
 export async function getCookieServer() {
-  return cookies().get("accessToken");
+  return cookies().get("accessToken")?.value;
 }

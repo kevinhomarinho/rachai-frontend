@@ -1,4 +1,5 @@
-import { UserManager } from "@/app/_classes/APIManager/UserManager";
+import type { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBody.types";
+import { UserManager } from "@classes/APIManager/UserManager";
 import { UpdateForm } from "./_components/UpdateForm";
 import { redirect } from "next/navigation";
 import { Sidebar } from "@components/Sidebar";
@@ -12,8 +13,8 @@ export default async function PerfilPage() {
     "use server";
     return UserManager.findUserByToken({ useServer: true });
   };
-  const user = await findData();
-  if (!user) redirect("/auth/signin");
+  const user = await findData() as ResponseUserBody & { error?: string; message?: string; };
+  if (!user || user.error === "UNAUTHORIZED") redirect("/auth/signin");
 
   return (
     <main className={styles.main}>

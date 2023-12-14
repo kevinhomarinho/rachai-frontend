@@ -2,8 +2,10 @@
 
 import type { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBody.types";
 import type { UpdateUserBody } from "@classes/APIManager/base/types/RequestBody.types";
+import { CookieManager } from "@classes/CookieManager";
 import { SelectImage } from "../SelectImage";
 import { UserManager } from "@classes/APIManager/UserManager";
+import { useRouter } from "next/navigation";
 import { apiErrors } from "@constants/apiErrors";
 import { Selector } from "../Selector";
 import { Button } from "@components/Button";
@@ -17,18 +19,23 @@ type UpdateFormProps = {
 
 export const UpdateForm = ({ user }: UpdateFormProps) => {
   const [tryingToUpdate, setTryingToUpdate] = useState(false);
+  const [tryingToDelete, setTryingToDelete] = useState(false);
   const [userImage, setUserImage] = useState<{ file?: File; url: string; } | undefined>(
     user.imagem_perfil ? { 
       url: `${process.env["NEXT_PUBLIC_BACKEND_URL"]}/${user.imagem_perfil}`
     } : undefined
   );
   const [value, setValue] = useState<"driver" | "passenger">(JSON.parse(user.motorista) ? "driver" : "passenger");
-
+  const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
-  
+
   const deleteAccount = async () => {
+    if (tryingToDelete) return;
+    setTryingToDelete(true);
     await UserManager.delete();
-    UserManager.signOut();
+    CookieManager.delete({ useServer: false });
+    setTryingToDelete(false);
+    router.push("/");
   };
 
   const updateAccount = async (updateUserBody: UpdateUserBody) => {

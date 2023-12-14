@@ -1,3 +1,4 @@
+import { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBody.types";
 import { SearchInput } from "@components/SearchInput";
 import { UserManager } from "@classes/APIManager/UserManager";
 import { FeedItems } from "./_components/FeedItems";
@@ -14,8 +15,8 @@ export default async function FeedPage() {
     return UserManager.findUserByToken({ useServer: true });
   };
 
-  const user = await findData();
-  if (!user) redirect("/auth/signin");
+  const user = await findData() as ResponseUserBody & { error?: string; message?: string; };
+  if (!user || user.error === "UNAUTHORIZED") redirect("/auth/signin");
   
   return (
     <main className={styles.main}>

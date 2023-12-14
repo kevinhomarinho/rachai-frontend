@@ -34,7 +34,11 @@ export class APIManager {
       const { error, message } = await response!.json() as { error?: string; message?: string; };
       if (apiErrors.includes(error!)) return { error, message };
     }
-
-    return await response.json();
+    
+    try {
+      return await response.json();
+    } catch {
+      return undefined;
+    }
   }
 }
