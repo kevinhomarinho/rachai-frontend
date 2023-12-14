@@ -1,4 +1,4 @@
-export const deleteCookieClient = (name: "accessToken" | "refreshToken") => {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+export function deleteCookieClient() {
+  document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   if (window) window.location.href = "/auth/signin";
-};
+}

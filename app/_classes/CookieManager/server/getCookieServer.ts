@@ -1,9 +1,6 @@
-"use server";
-
-import { cookies } from "next/headers";
-
-export const getCookieServer = (name: "accessToken" | "refreshToken") => {
-  const cookiesStore = cookies();
-  const namedCookie = cookiesStore.get(name);
-  return namedCookie ? namedCookie.value! : undefined;
-};
+export async function getCookieServer() {
+  const response = await fetch("http://localhost:3000/api/cookie/get", {
+    method: "GET"
+  });
+  return await response.json();
+}

@@ -15,19 +15,17 @@ export class APIManager {
       body: body,
     });
 
-    if (response.status === 401) return this.signOut(useServer);
+    if (response.status === 401 || response.status === 403) return this.signOut(useServer);
 
-    const authorization = response.headers.get("Authorization");
-    if (authorization && authorization.startsWith("Bearer ")) {
-      const accessToken = authorization.substring(7);
-      CookieManager.set(accessToken, useServer);
+    const accessToken = response.headers.get("Authorization");
+    if (accessToken && accessToken.startsWith("Bearer ")) {
+      await CookieManager.set(accessToken, useServer);
     }
 
     return response;
   }
 
   public static async signOut({ useServer }: { useServer: boolean } = { useServer: false }): Promise<void> {
-    const accessToken = CookieManager.get({ useServer });
-    if (accessToken) CookieManager.delete({ useServer });
+    return await CookieManager.delete({ useServer });
   }
 }

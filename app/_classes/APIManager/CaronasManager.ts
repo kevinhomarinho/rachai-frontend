@@ -1,7 +1,7 @@
 import { ResponseUserBody } from "./base/types/ResponseBody.types";
 import { CookieManager } from "../CookieManager";
 import { APIManager } from "@classes/APIManager/base";
-import { apiErrors } from "@/app/_constants/apiErrors";
+import { apiErrors } from "@constants/apiErrors";
 
 export class CaronasManager extends APIManager {
   public static async findAll(
