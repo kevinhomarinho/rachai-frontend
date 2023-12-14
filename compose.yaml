@@ -1,0 +1,16 @@
+version: "3"
+services:
+  backend:
+    image: vinirosa08/rachaibackend:latest
+    ports:
+      - 8080:8080
+  frontend:
+    image: vinirosa08/rachaifrontend:latest
+    ports:
+      - 3000:3000
+    links:
+      - backend
+
+networks:
+  rachai_network:
+    driver: bridge
