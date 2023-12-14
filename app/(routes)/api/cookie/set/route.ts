@@ -1,9 +1,8 @@
-import type { NextApiRequest } from "next";
 import { cookies } from "next/headers";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: Request) {
   const cookiesStore = cookies();
-  const accessToken = req.headers.authorization!.substring(7);
+  const accessToken = req.headers.get("Authorization")!.substring(7);
   const twoHoursInSeconds = 7200;
   const currentDate = new Date();
   currentDate.setTime(currentDate.getTime() + (twoHoursInSeconds * 1000));
