@@ -6,7 +6,7 @@ export class APIManager {
   protected static async request<U extends BackendRoutes>(
     url: U,
     headers: HeadersInit = {},
-    useServer: { useServer: boolean },
+    useServer: { useServer: boolean; url?: string; },
     body?: string | FormData,
     method: string = "POST"
   ): Promise<Response> {
@@ -24,8 +24,9 @@ export class APIManager {
     return response;
   }
 
-  protected static async handleResponse(response: Response, useServer: { useServer: boolean } = { useServer: false }) {
+  protected static async handleResponse(response: Response, useServer: { useServer: boolean; url?: string; } = { useServer: false }) {
     if (response.status === 401 || response.status === 403) {
+      console.log(useServer);
       await CookieManager.delete(useServer);
       return { error: "UNAUTHORIZED", message: "Sem autorização, volte para o login." };
     }

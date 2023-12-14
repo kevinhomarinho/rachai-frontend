@@ -2,19 +2,22 @@
 
 import type { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBody.types";
 import { CaronasManager } from "@classes/APIManager/CaronasManager";
+import { CookieManager } from "@/app/_classes/CookieManager";
+import { UserManager } from "@/app/_classes/APIManager/UserManager";
 import { mergeArray } from "@functions/mergeArray";
+import { useRouter } from "next/navigation";
 import { FeedItem } from "../FeedItem";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./FeedItems.module.css";
-import { FeedItemLoading } from "../FeedItem/FeedItemLoading";
+import Image from "next/image";
 
-export const FeedItems = ({ isDriver }: { isDriver: boolean; }) => {
-  console.log(isDriver);
-
+export const FeedItems = () => {
   const [allItemsLoaded, setAllItemsLoaded] = useState(false);
   const [searching, setSearching] = useState(false);
   const [items, setItems] = useState<ResponseUserBody[]>([]);
   const [page, setPage] = useState(0);
+  const [user, setUser] = useState<ResponseUserBody | null>(null);
+  const router = useRouter();
 
   const getitems = async () => {
     if (searching) return;
@@ -44,7 +47,17 @@ export const FeedItems = ({ isDriver }: { isDriver: boolean; }) => {
     setPage(prevPage => prevPage + 1);
   }, [searching, allItemsLoaded]);
   
+  const getUser = async () => {
+    const userFromToken = await UserManager.findUserByToken() as ResponseUserBody & { error?: string; message?: string; };
+    if (!userFromToken || userFromToken.error === "UNAUTHORIZED") {
+      await CookieManager.delete({ useServer: false });
+      return router.push("/auth/signin");
+    }
+    setUser(userFromToken);
+  };
+
   useEffect(() => {
+    getUser();
     getitems();
   }, []);
 
@@ -59,16 +72,20 @@ export const FeedItems = ({ isDriver }: { isDriver: boolean; }) => {
     if (page !== 0 && !allItemsLoaded) getitems();
   }, [page, allItemsLoaded]);
 
+  if (!user) return null;
+
   return (
     <div className={styles.items}>
       {
         items.map(item => (
-          <FeedItem key={item.email} />
+          <FeedItem actualUser={user} user={item} key={item.email} />
         ))
       }
       {
-        !searching && (
-          [1, 2, 3].map(value => ( <FeedItemLoading key={value} />))
+        searching && (
+          <div className={styles.loadingDiv}>
+            <Image src="/imagens/loading.gif" alt="Loading" width={350} height={350} priority />
+          </div>
         )
       }
     </div>

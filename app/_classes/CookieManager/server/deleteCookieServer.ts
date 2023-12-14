@@ -1,9 +1,7 @@
 "use server";
 
-import { headers } from "next/headers";
-
-export async function deleteCookieServer() {
-  await fetch(`${headers().get("referer")}api/cookie/delete`, {
+export async function deleteCookieServer(url: string) {
+  await fetch(`${url}api/cookie/delete`, {
     method: "GET"
   });
 }

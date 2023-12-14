@@ -10,24 +10,34 @@ import { apiErrors } from "@constants/apiErrors";
 import { Selector } from "../Selector";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./UpdateForm.module.css";
 
-type UpdateFormProps = {
-  user: ResponseUserBody;
-};
-
-export const UpdateForm = ({ user }: UpdateFormProps) => {
+export const UpdateForm = () => {
   const [tryingToUpdate, setTryingToUpdate] = useState(false);
   const [tryingToDelete, setTryingToDelete] = useState(false);
-  const [userImage, setUserImage] = useState<{ file?: File; url: string; } | undefined>(
-    user.imagem_perfil ? { 
-      url: `${process.env["NEXT_PUBLIC_BACKEND_URL"]}/${user.imagem_perfil}`
-    } : undefined
-  );
-  const [value, setValue] = useState<"driver" | "passenger">(JSON.parse(user.motorista) ? "driver" : "passenger");
+  const [user, setUser] = useState<ResponseUserBody | null>(null);
+  const [userImage, setUserImage] = useState<{ file?: File; url: string; } | undefined>(undefined);
+  const [value, setValue] = useState<"driver" | "passenger">("passenger");
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
+
+  const getUser = async () => {
+    const userFromToken = await UserManager.findUserByToken() as ResponseUserBody & { error?: string; message?: string; };
+    if (!userFromToken || userFromToken.error === "UNAUTHORIZED") {
+      await CookieManager.delete({ useServer: false });
+      return router.push("/auth/signin");
+    }
+    setUserImage(userFromToken.imagem_perfil ? { 
+      url: `${process.env["NEXT_PUBLIC_BACKEND_URL"]}/${userFromToken.imagem_perfil}`
+    } : undefined);
+    setValue(JSON.parse(userFromToken.motorista) ? "driver" : "passenger");
+    setUser(userFromToken);
+  };
+
+  useEffect(() => { getUser(); }, []);
+
+  if (!user) return null;
 
   const deleteAccount = async () => {
     if (tryingToDelete) return;
@@ -37,6 +47,7 @@ export const UpdateForm = ({ user }: UpdateFormProps) => {
     setTryingToDelete(false);
     router.push("/");
   };
+
 
   const updateAccount = async (updateUserBody: UpdateUserBody) => {
     const response = await UserManager.update(updateUserBody);
