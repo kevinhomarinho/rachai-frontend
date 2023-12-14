@@ -8,6 +8,13 @@
   gap: 5px;
 }
 
+.link {
+  color: var(--black);
+}
+.link:hover {
+  opacity: 0.6;
+}
+
 .register_title {
   font-size: 1.0rem;
   font-family: 'verdana';

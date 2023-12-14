@@ -67,7 +67,7 @@ export const LoginForm = () => {
         <Input type="password" name="password" placeholder="Digite sua senha" />
       </div>
       <Button type="submit">Conectar-se</Button>
-      <Text size="xxs" asChild><Link href="/auth/signup">Ainda não tem uma conta?</Link></Text>
+      <Text size="xxs" className={styles.link} asChild><Link href="/auth/signup">Ainda não tem uma conta?</Link></Text>
     </form>
   );
 };

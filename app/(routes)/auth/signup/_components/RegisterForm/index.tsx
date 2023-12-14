@@ -104,7 +104,7 @@ export const RegisterForm = () => {
         <Input type="password" name="password" placeholder="Digite sua senha" />
       </div>
       <Button type="submit">Registrar-se</Button>
-      <Text size="xxs" asChild><Link href="/auth/signin">Já tem uma conta?</Link></Text>
+      <Text size="xxs" className={styles.link} asChild><Link href="/auth/signin">Já tem uma conta?</Link></Text>
     </form>
   );
 };
