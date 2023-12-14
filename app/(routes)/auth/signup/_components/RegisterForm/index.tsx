@@ -11,6 +11,7 @@ import React, { useRef, useState } from "react";
 import styles from "./RegisterForm.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { alphanumericCharactersOnly, oneLower, oneNumber, oneSpecial, oneUpper, validateEmail } from "@/app/_functions/validations";
 
 export const RegisterForm = () => {
   const [tryingToRegister, setTryingToRegister] = useState(false);
@@ -47,16 +48,48 @@ export const RegisterForm = () => {
     const email = formData.get("email")?.valueOf() as string;
     const ra = formData.get("ra")?.valueOf() as string;
 
-    // validações
-    // if (password !== confirmPassword) {
-    //   setTryingToRegister(false);
-    //   window.alert("É necessário que .");
-    //   return;
-    // } else if (!acceptedTerms) {
-    //   setTryingToRegister(false);
-    //   window.alert("Você precisa aceitar os termos se quiser fazer parte do Gamix!");
-    //   return;
-    // }
+    if (password.length < 6) {
+      setTryingToRegister(false);
+      window.alert("É necessário que a senha tenha no mínimo 6 caracteres.");
+      return;
+    } else if (!oneUpper(password)) {
+      setTryingToRegister(false);
+      window.alert("É necessário que a senha tenha pelo menos uma maiúscula.");
+      return;
+    } else if (!oneLower(password)) {
+      setTryingToRegister(false);
+      window.alert("É necessário que a senha tenha no mínimo uma minúscula.");
+      return;
+    } else if (!oneNumber(password)) {
+      setTryingToRegister(false);
+      window.alert("É necessário que a senha tenha no mínimo um número.");
+      return;
+    } else if (!oneSpecial(password)) {
+      setTryingToRegister(false);
+      window.alert("É necessário que a senha tenha no mínimo um caractere especial.");
+      return;
+    } else if (username.length < 3) {
+      setTryingToRegister(false);
+      window.alert("O nome de usuário deve conter no mínimo 3 caracteres.");
+      return;
+    } else if (username.length > 50) {
+      setTryingToRegister(false);
+      window.alert("O nome de usuário deve conter no máximo 50 caracteres.");
+      return;
+    } else if (!alphanumericCharactersOnly(username)) {
+      setTryingToRegister(false);
+      window.alert("O nome de usuário pode conter apenas caracteres alfanuméricos.");
+      return;
+    } else if (!/^\d{2,13}$/.test(ra)) {
+      setTryingToRegister(false);
+      window.alert("O RA deve conter no mínimo 2 caracteres e no máximo 13.");
+      return;
+    } else if (!validateEmail(email)) {
+      setTryingToRegister(false);
+      window.alert("O e-mail está em um formato incorreto.");
+      return;
+    }
+
     register({ username, password, email, ra });
   };
 

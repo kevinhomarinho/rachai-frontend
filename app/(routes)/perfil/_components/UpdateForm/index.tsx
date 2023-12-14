@@ -13,6 +13,7 @@ import { Button } from "@components/Button";
 import { Input } from "@components/Input";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./UpdateForm.module.css";
+import { alphanumericCharactersOnly } from "@/app/_functions/validations";
 
 export const UpdateForm = () => {
   const [tryingToUpdate, setTryingToUpdate] = useState(false);
@@ -86,6 +87,33 @@ export const UpdateForm = () => {
     if (origem !== "" && user.origem !== origem) updateUserBody["origem"] = origem;
     if (destino !== "" && user.destino !== destino) updateUserBody["destino"] = destino;
     if (userImage && userImage.file) updateUserBody["imagem_perfil"] = userImage.file;
+    
+    if (updateUserBody["username"]) {
+      if (updateUserBody["username"].length < 3) {
+        setTryingToUpdate(false);
+        window.alert("O nome de usuário deve conter no mínimo 3 caracteres.");
+        return;
+      } else if (updateUserBody["username"].length > 50) {
+        setTryingToUpdate(false);
+        window.alert("O nome de usuário deve conter no máximo 50 caracteres.");
+        return;
+      } else if (!alphanumericCharactersOnly(updateUserBody["username"])) {
+        setTryingToUpdate(false);
+        window.alert("O nome de usuário pode conter apenas caracteres alfanuméricos.");
+        return;
+      }
+    }
+    if (updateUserBody["horarios"]) {
+      if (updateUserBody["horarios"].length < 3) {
+        setTryingToUpdate(false);
+        window.alert("Os horários devem conter no mínimo 3 caracteres.");
+        return;
+      } else if (updateUserBody["horarios"].length > 100) {
+        setTryingToUpdate(false);
+        window.alert("Os horários devem conter no máximo 100 caracteres.");
+        return;
+      }
+    }
 
     updateAccount(updateUserBody);
   };
