@@ -2,15 +2,16 @@
 
 import type { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBody.types";
 import { CaronasManager } from "@classes/APIManager/CaronasManager";
-import { CookieManager } from "@/app/_classes/CookieManager";
-import { UserManager } from "@/app/_classes/APIManager/UserManager";
+import { CookieManager } from "@classes/CookieManager";
+import { UserManager } from "@classes/APIManager/UserManager";
+import { SearchInput } from "../SearchInput";
 import { mergeArray } from "@functions/mergeArray";
 import { useRouter } from "next/navigation";
 import { FeedItem } from "../FeedItem";
+import { Text } from "@components/Text";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./FeedItems.module.css";
 import Image from "next/image";
-import { SearchInput } from "../SearchInput";
 
 export const FeedItems = () => {
   const [allItemsLoaded, setAllItemsLoaded] = useState(false);
@@ -77,8 +78,9 @@ export const FeedItems = () => {
 
   const handleSearch = (searchText: string) => {
     setSearch(searchText);
-    setAllItemsLoaded(false);
+    setItems([]);
     setPage(0);
+    setAllItemsLoaded(false);
   };
 
   useEffect(() => {
@@ -95,6 +97,21 @@ export const FeedItems = () => {
           items.map(item => (
             <FeedItem actualUser={user} user={item} key={item.email} />
           ))
+        }
+        {
+          items.length === 0 && (
+            <div className={styles.loadingDiv}>
+              <Text size="lg" asChild>
+                <h3>
+                  { 
+                    user.motorista 
+                      ? "Não foram encontrados passageiros nessa origem."
+                      : "Sem caronas disponíveis nessa região." 
+                  }
+                </h3>
+              </Text>
+            </div>
+          )
         }
         {
           searching && (
