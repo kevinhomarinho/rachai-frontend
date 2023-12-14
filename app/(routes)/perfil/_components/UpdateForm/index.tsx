@@ -2,6 +2,7 @@
 
 import type { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBody.types";
 import type { UpdateUserBody } from "@classes/APIManager/base/types/RequestBody.types";
+import { DeleteUserModal } from "../DeleteUserModal";
 import { CookieManager } from "@classes/CookieManager";
 import { SelectImage } from "../SelectImage";
 import { UserManager } from "@classes/APIManager/UserManager";
@@ -98,7 +99,9 @@ export const UpdateForm = () => {
       <Input type="text" defaultValue={user.horarios} name="horarios" placeholder="Horários em que você está disponível" />
       <Selector value={value} setValue={setValue} />
       <div className={styles.actions}>
-        <Button type="button" onClick={deleteAccount}>Deletar conta</Button>
+        <DeleteUserModal handleDeleteAccount={deleteAccount}>
+          <Button type="button">Deletar conta</Button>
+        </DeleteUserModal>
         <Button type="submit" color="secondary">Atualizar</Button>
       </div>
     </form>
