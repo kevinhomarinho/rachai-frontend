@@ -9,7 +9,6 @@ export async function GET(req: Request) {
 
   cookiesStore.set("accessToken", accessToken, {
     maxAge: twoHoursInSeconds,
-    secure: !!process.env["NEXT_PUBLIC_BACKEND_URL"]?.includes("https"),
     expires: currentDate,
     path: "/",
     sameSite: "lax"

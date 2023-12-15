@@ -9,7 +9,7 @@ export class APIManager {
     body?: string | FormData,
     method: string = "POST"
   ): Promise<Response> {
-    const response = await fetch(`${process.env["NEXT_PUBLIC_BACKEND_URL"]}${url}`, {
+    const response = await fetch(`http://localhost:8080${url}`, {
       method: method,
       headers: headers,
       body: body,

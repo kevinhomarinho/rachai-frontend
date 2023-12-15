@@ -5,10 +5,12 @@ WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
 RUN npm ci
+RUN npm i sharp
 
 FROM base as builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /root/.npm /root/.npm
 COPY app app
 COPY public public
 COPY .eslintrc.json .
@@ -23,8 +25,7 @@ FROM base as runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
-RUN echo "NEXT_PUBLIC_BACKEND_URL=http://backend:8080" > /app/.env
+ENV NEXT_SHARP_PATH=/app/node_modules/sharp
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

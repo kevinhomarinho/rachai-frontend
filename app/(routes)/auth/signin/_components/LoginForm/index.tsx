@@ -45,17 +45,6 @@ export const LoginForm = () => {
     const password = formData.get("password")?.valueOf() as string;
     const email = formData.get("email")?.valueOf() as string;
 
-    // validações
-    // if (password !== confirmPassword) {
-    //   setTryingToLogin(false);
-    //   window.alert("É necessário que .");
-    //   return;
-    // } else if (!acceptedTerms) {
-    //   setTryingToLogin(false);
-    //   window.alert("Você precisa aceitar os termos se quiser fazer parte do Gamix!");
-    //   return;
-    // }
-
     login({ email, password });
   };
   return (

@@ -12,7 +12,7 @@ type FeedItemProps = {
 
 export const FeedItem = ({ actualUser, user }: FeedItemProps) => {
   const url = user.imagem_perfil
-    ? `${process.env["NEXT_PUBLIC_BACKEND_URL"]}/${user.imagem_perfil}`
+    ? `http://localhost:8080${user.imagem_perfil}`
     : "/imagens/logo-no-bg.png";
   return (
     <div className={styles.feedItem}>
