@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
 RUN npm ci
+RUN npm i sharp
 
 FROM base as builder
 WORKDIR /app
