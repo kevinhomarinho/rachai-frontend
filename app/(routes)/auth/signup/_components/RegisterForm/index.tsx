@@ -1,6 +1,5 @@
 "use client";
 
-import { alphanumericCharactersOnly, oneLower, oneNumber, oneSpecial, oneUpper, validateEmail } from "@/app/_functions/validations";
 import { UserManager } from "@classes/APIManager/UserManager";
 import { SignUpBody } from "@classes/APIManager/base/types/RequestBody.types";
 import { apiErrors } from "@constants/apiErrors";
@@ -10,7 +9,9 @@ import { Input } from "@components/Input";
 import { Text } from "@components/Text";
 import React, { useRef, useState } from "react";
 import styles from "./RegisterForm.module.css";
+import Image from "next/image";
 import Link from "next/link";
+import { alphanumericCharactersOnly, oneLower, oneNumber, oneSpecial, oneUpper, validateEmail } from "@/app/_functions/validations";
 
 export const RegisterForm = () => {
   const [tryingToRegister, setTryingToRegister] = useState(false);
@@ -94,7 +95,7 @@ export const RegisterForm = () => {
 
   return (
     <form className={styles.register_area} onSubmit={handleSubmit} ref={formRef}>
-      <img src="/imagens/logo-no-bg.png" alt="logo" width={250} height={146} />
+      <Image src="/imagens/logo-no-bg.png" alt="logo" width={250} height={146} priority />
       <Text asChild><h2 className={styles.register_title}>Registro</h2></Text>
       <div className={styles.register_fields}>
         <Input type="text" name="username" placeholder="Digite seu nome de usuário" />

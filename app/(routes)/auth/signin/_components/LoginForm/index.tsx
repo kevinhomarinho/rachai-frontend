@@ -9,6 +9,7 @@ import { Input } from "@components/Input";
 import { Text } from "@components/Text";
 import React, { useRef, useState } from "react";
 import styles from "../../../signup/_components/RegisterForm/RegisterForm.module.css";
+import Image from "next/image";
 import Link from "next/link";
 
 export const LoginForm = () => {
@@ -44,22 +45,11 @@ export const LoginForm = () => {
     const password = formData.get("password")?.valueOf() as string;
     const email = formData.get("email")?.valueOf() as string;
 
-    // validações
-    // if (password !== confirmPassword) {
-    //   setTryingToLogin(false);
-    //   window.alert("É necessário que .");
-    //   return;
-    // } else if (!acceptedTerms) {
-    //   setTryingToLogin(false);
-    //   window.alert("Você precisa aceitar os termos se quiser fazer parte do Gamix!");
-    //   return;
-    // }
-
     login({ email, password });
   };
   return (
     <form className={styles.register_area} onSubmit={handleSubmit} ref={formRef}>
-      <img src="/imagens/logo-no-bg.png" alt="logo" width={250} height={146} />
+      <Image src="/imagens/logo-no-bg.png" alt="logo" width={250} height={146} priority />
       <Text asChild><h2 className={styles.register_title}>Login</h2></Text>
       <div className={styles.register_fields}>
         <Input type="email" name="email" placeholder="Digite seu e-mail" />

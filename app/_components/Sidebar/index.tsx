@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Text } from "@components/Text";
 import React, { useRef, useState } from "react";
 import styles from "./Sidebar.module.css";
+import Image from "next/image";
 import Link from "next/link";
 
 export const Sidebar = () => {
@@ -32,7 +33,7 @@ export const Sidebar = () => {
       }
 
       <div className={styles.sidebarImgRoot}>
-        <img src="/imagens/logo-no-bg.png" className={styles.sidebarImg} alt="Logo do aplicativo" width={210} height={120} />  
+        <Image src="/imagens/logo-no-bg.png" className={styles.sidebarImg} alt="Logo do aplicativo" width={210} height={120} priority />  
       </div>
       <div className={styles.sidebarOptions} ref={optionsRef} style={{display: "none"}}>
         <Text className={styles.sidebarOption} fixeSize asChild><Link href="/">Início</Link></Text>

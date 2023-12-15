@@ -31,7 +31,7 @@ export const UpdateForm = () => {
       return router.push("/auth/signin");
     }
     setUserImage(userFromToken.imagem_perfil ? { 
-      url: `http://localhost:8080/${userFromToken.imagem_perfil}`
+      url: `http://localhost:8080${userFromToken.imagem_perfil}`
     } : undefined);
     setValue(JSON.parse(userFromToken.motorista) ? "driver" : "passenger");
     setUser(userFromToken);

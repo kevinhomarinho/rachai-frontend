@@ -11,6 +11,7 @@ import { FeedItem } from "../FeedItem";
 import { Text } from "@components/Text";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./FeedItems.module.css";
+import Image from "next/image";
 
 export const FeedItems = () => {
   const [allItemsLoaded, setAllItemsLoaded] = useState(false);
@@ -115,7 +116,7 @@ export const FeedItems = () => {
         {
           searching && (
             <div className={styles.loadingDiv}>
-              <img src="/imagens/loading.gif" alt="Loading" width={350} height={350} />
+              <Image src="/imagens/loading.gif" alt="Loading" width={350} height={350} priority />
             </div>
           )
         }

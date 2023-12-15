@@ -2,6 +2,7 @@ import type { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBo
 import { Button } from "@/app/_components/Button";
 import { Text } from "@/app/_components/Text";
 import styles from "./FeedItem.module.css";
+import Image from "next/image";
 import React from "react";
 
 type FeedItemProps = {
@@ -11,14 +12,14 @@ type FeedItemProps = {
 
 export const FeedItem = ({ actualUser, user }: FeedItemProps) => {
   const url = user.imagem_perfil
-    ? `http://localhost:8080/${user.imagem_perfil}`
+    ? `http://localhost:8080${user.imagem_perfil}`
     : "/imagens/logo-no-bg.png";
   return (
     <div className={styles.feedItem}>
       <div className={styles.profileImgRoot}>
-        <img
+        <Image
           src={url}
-          alt={`Foto de perfil do ${user.username}`} width={300} height={300}
+          alt={`Foto de perfil do ${user.username}`} width={300} height={300} quality={100}
           className={styles.profileImg}
         />
       </div>
