@@ -2,7 +2,6 @@ import type { ResponseUserBody } from "@classes/APIManager/base/types/ResponseBo
 import { Button } from "@/app/_components/Button";
 import { Text } from "@/app/_components/Text";
 import styles from "./FeedItem.module.css";
-import Image from "next/image";
 import React from "react";
 
 type FeedItemProps = {
@@ -17,9 +16,9 @@ export const FeedItem = ({ actualUser, user }: FeedItemProps) => {
   return (
     <div className={styles.feedItem}>
       <div className={styles.profileImgRoot}>
-        <Image
+        <img
           src={url}
-          alt={`Foto de perfil do ${user.username}`} width={300} height={300} quality={100}
+          alt={`Foto de perfil do ${user.username}`} width={300} height={300}
           className={styles.profileImg}
         />
       </div>

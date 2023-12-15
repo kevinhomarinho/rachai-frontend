@@ -3,7 +3,6 @@
 import { PencilIcon } from "@heroicons/react/24/solid";
 import React, { useRef } from "react";
 import styles from "./SelectImage.module.css";
-import Image from "next/image";
 
 type SelectImageProps = {
   setUserImage: React.Dispatch<React.SetStateAction<{ file?: File; url: string; } | undefined>>;
@@ -26,13 +25,12 @@ export const SelectImage = ({ image, setUserImage }: SelectImageProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div className={styles.imageSelector} onClick={() => inputRef.current?.click()}>
-      <Image
+      <img
         src={image && image.url ? image.url : "/imagens/logo-no-bg.png"}
         width={250}
         height={150}
         alt="Imagem do usuário"
         className={styles.image}
-        priority
       />
       <div className={styles.imageOverlay}>
         <PencilIcon className={styles.imageOverlayIcon} />
