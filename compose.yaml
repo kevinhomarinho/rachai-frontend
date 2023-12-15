@@ -1,11 +1,13 @@
 version: "3"
 services:
   backend:
-    image: vinirosa08/rachaibackend:latest
+#    image: vinirosa08/rachaibackend:latest
+    image: back:latest
     ports:
       - 8080:8080
   frontend:
-    image: vinirosa08/rachaifrontend:latest
+#    image: vinirosa08/rachaifrontend:latest
+    build: .
     ports:
       - 3000:3000
     links:
